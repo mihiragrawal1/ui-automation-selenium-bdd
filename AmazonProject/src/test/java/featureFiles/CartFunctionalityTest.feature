@@ -13,6 +13,16 @@ Feature: Validate Cart Functionality
     Then Added product <productName> should be available/visible in users-cart
 
     Examples: 
+      | productName  |   
+      | Xiaomi Smart TV A 80 cm (32) HD Ready Smart Google LED TV L32MA-AIN (Black) |   
+      
+      
+   @cart
+  Scenario Outline: Validate that user is able to remove a product of choice from cart
+    Given User goes to cart page of application
+    When User check for the <productName> he want to remove and remove it from cart
+    Then product should not be available in cart
+
+    Examples: 
       | productName  | 
-      | Apple iPhone 13 (128GB) - starlight |    
       | Xiaomi Smart TV A 80 cm (32) HD Ready Smart Google LED TV L32MA-AIN (Black) |   

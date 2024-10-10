@@ -57,4 +57,22 @@ public class cartFunctionality {
 		List<String> productInCart = cartPageObj.getListOfItemInCart();
 		Assert.assertTrue(productInCart.contains(productName.toLowerCase()));
 	}
+
+	@Given("User goes to cart page of application")
+	public void goToCartpage() {
+		lPage.goToCart();
+
+	}
+
+	@When("^User check for the (.+) he want to remove and remove it from cart$")
+	public void removeProductFromcart(String productToPurchase) {
+		cartPageObj.removeFromCart(productToPurchase);
+	}
+
+	@Then("product should not be available in cart")
+	public void productShouldNotBeThereInCart() {
+		Assert.assertTrue(cartPageObj.emptyCart().isDisplayed());
+		Assert.assertTrue(cartPageObj.emptyCart().getText().toLowerCase().contains("cart is empty"));
+	}
+
 }
