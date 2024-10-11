@@ -11,9 +11,9 @@ Feature: User Login Functionality
     Then User should be on homePage of application that is <url>
 
     Examples: 
-      | number     | password 	| url  																	 |
-      | 7972089662 | Amazon@123 | https://www.amazon.in/?ref_=nav_signin |
-      | 7972089662 | Amazon@123 | https://www.amazon.in/?ref_=nav_signin |
+      | number     		 | password 	| url  																	 |
+      | useYourAccount | Amazon@123 | https://www.amazon.in/?ref_=nav_signin |
+      | useYourAccount | Amazon@123 | https://www.amazon.in/?ref_=nav_signin |
 
       
       
@@ -49,8 +49,8 @@ Feature: User Login Functionality
     Then User should redirected to signin-page with <url>
 
     Examples: 
-      | number       | password   | url  				   		       |
-      | 7972089662   | Amazon@123 | www.amazon.in/ap/signin? |
-      | 7972089662   | Amazon@123 | www.amazon.in/ap/signin? |
+      | number           | password   | url  				   		       |
+      | useYourAccount   | Amazon@123 | www.amazon.in/ap/signin? |
+      | useYourAccount   | Amazon@123 | www.amazon.in/ap/signin? |
       
       

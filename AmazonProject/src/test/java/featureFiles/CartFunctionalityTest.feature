@@ -4,7 +4,7 @@ Feature: Validate Cart Functionality
   
     
     Background: User is on amazon.in
-    Given User is already loggedIn to application with  valid credentials "7972089662" and "Amazon@123"
+    Given User is already loggedIn to application with  valid credentials "useYourAccount" and "Amazon@123"
 
   @cart
   Scenario Outline: Validate that user is able to add a product of choice to cart for purchase
