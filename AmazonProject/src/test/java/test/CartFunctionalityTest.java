@@ -37,9 +37,9 @@ public class CartFunctionalityTest extends baseTest {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 	}
-	// Apple iPhone 13 (128GB) - Starlight
+	
 
-	@Test(dataProvider = "getValidLoginDataset", description = "Validate if user can add a product of choice to cart")
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,dataProvider = "getValidLoginDataset", description = "Validate if user can add a product of choice to cart")
 	public void validateAddToCartFunctionality(HashMap<String, String> input) throws InterruptedException {
 		lPage.goToSignInPage();
 		sPage.userSignin(input.get("number"), input.get("pass"));
@@ -63,7 +63,7 @@ public class CartFunctionalityTest extends baseTest {
 
 	}
 
-	@Test(dependsOnMethods = "validateAddToCartFunctionality", dataProvider = "getValidLoginDataset", description = "Valiadte if user can delete/remove a product from cart")
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,dependsOnMethods = "validateAddToCartFunctionality", dataProvider = "getValidLoginDataset", description = "Valiadte if user can delete/remove a product from cart")
 	public void validateRemovingItemFromCart(HashMap<String, String> input) throws InterruptedException {
 		lPage.goToSignInPage();
 		sPage.userSignin(input.get("number"), input.get("pass"));
@@ -88,6 +88,6 @@ public class CartFunctionalityTest extends baseTest {
 		jsonReader reader = new jsonReader();
 		List<HashMap<String, String>> data = reader
 				.readFromJsonFile(System.getProperty("user.dir") + "/src/test/resources/data/validLoginData.json");
-		return new Object[][] { { data.get(0) } };
+		return new Object[][] { { data.get(0) },{ data.get(1) } };
 	}
 }

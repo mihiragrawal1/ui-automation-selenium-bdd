@@ -34,7 +34,7 @@ public class loginTest extends baseTest {
 	}
 
 
-	@Test(priority = 1, dataProvider = "getValidLoginData", description = "Validate user login with valid credetials",
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,priority = 1, dataProvider = "getValidLoginData", description = "Validate user login with valid credetials",
 			groups = "login/logout")
 	public void validUserTest(HashMap<String, String> input) {
 		lPage.goToSignInPage();
@@ -43,7 +43,7 @@ public class loginTest extends baseTest {
 		Assert.assertEquals(driver.getCurrentUrl(), afterSigninUrl);
 	}
 
-	@Test(priority = 2, dataProvider = "getInvalidLoginData", description = "Validate user login with invalid credetials",
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,priority = 2, dataProvider = "getInvalidLoginData", description = "Validate user login with invalid credetials",
 			groups = "login/logout")
 	
 	public void invalidUserTest(HashMap<String, String> input) {
@@ -53,7 +53,7 @@ public class loginTest extends baseTest {
 
 	}
 	
-	@Test(description="Validate user login with empty credentials",priority=3,groups="login/logout")
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,description="Validate user login with empty credentials",priority=3,groups="login/logout")
 	public void emptyCredentialsTest()
 	{		
 		lPage.goToSignInPage();
@@ -61,7 +61,7 @@ public class loginTest extends baseTest {
 		Assert.assertTrue(driver.getCurrentUrl().contains("www.amazon.in/ap/signin?"));
 	}
 
-	@Test(description="validate user logout/signout when clicked on signout button",priority=3,groups="login/logout",dataProvider="getValidLoginData")
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,description="validate user logout/signout when clicked on signout button",priority=3,groups="login/logout",dataProvider="getValidLoginData")
 	public void logoutTest(HashMap<String,String> input)
 	{
 		lPage.goToSignInPage();
@@ -77,7 +77,7 @@ public class loginTest extends baseTest {
 		jsonReader reader = new jsonReader();
 		List<HashMap<String, String>> data = reader
 				.readFromJsonFile(System.getProperty("user.dir") + "/src/test/resources/data/validLoginData.json");
-		return new Object[][] { { data.get(0) }, { data.get(1) } };
+		return new Object[][] { { data.get(0) }, { data.get(1) } };    
 
 	}
 

@@ -1,5 +1,7 @@
 package Runner;
 
+import org.testng.annotations.Test;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
@@ -11,4 +13,10 @@ import io.cucumber.testng.CucumberOptions;
 monochrome = true)
 public class TestRunner extends AbstractTestNGCucumberTests {
 
+	
+	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class)
+	public void methodForRetryingCucumberTests()
+	{
+		
+	}
 }
