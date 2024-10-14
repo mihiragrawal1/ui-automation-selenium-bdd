@@ -1,5 +1,9 @@
 package test;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Collections;
@@ -12,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import Utilities.jsonReader;
@@ -22,8 +27,10 @@ import pageObjects.landingPage_po;
 import pageObjects.productDetails_po;
 import pageObjects.signinPage_po;
 
+@Listeners(Listener.ListenersClass.class)
+//
 public class CartFunctionalityTest extends baseTest {
-
+//
 	WebDriverWait wait;
 	landingPage_po lPage;
 	signinPage_po sPage;
@@ -38,7 +45,7 @@ public class CartFunctionalityTest extends baseTest {
 
 	}
 	
-
+//
 	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,dataProvider = "getValidLoginDataset", description = "Validate if user can add a product of choice to cart")
 	public void validateAddToCartFunctionality(HashMap<String, String> input) throws InterruptedException {
 		lPage.goToSignInPage();
@@ -59,7 +66,7 @@ public class CartFunctionalityTest extends baseTest {
 
 		List<String> productInCart = cartPageObj.getListOfItemInCart();
 //		System.out.println(productInCart);
-		Assert.assertTrue(productInCart.contains(productToPurchase.toLowerCase()));
+		AssertJUnit.assertTrue(productInCart.contains(productToPurchase.toLowerCase()));
 
 	}
 
@@ -70,8 +77,8 @@ public class CartFunctionalityTest extends baseTest {
 		lPage.goToCart();
 		Cartpage_po cartPageObj = new Cartpage_po(driver);
 		cartPageObj.removeFromCart(productToPurchase);
-		Assert.assertTrue(cartPageObj.emptyCart().isDisplayed());
-		Assert.assertTrue(cartPageObj.emptyCart().getText().toLowerCase().contains("cart is empty"));
+		AssertJUnit.assertTrue(cartPageObj.emptyCart().isDisplayed());
+		AssertJUnit.assertTrue(cartPageObj.emptyCart().getText().toLowerCase().contains("cart is empty"));
 
 //		if (cartPageObj.emptyCart().isDisplayed()) {
 //			Assert.assertTrue(cartPageObj.emptyCart().getText().toLowerCase().trim().contains("cart is empty"));

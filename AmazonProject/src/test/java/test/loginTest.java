@@ -1,5 +1,9 @@
 package test;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
@@ -11,6 +15,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import Utilities.jsonReader;
@@ -18,6 +23,7 @@ import baseComponent.baseTest;
 import pageObjects.landingPage_po;
 import pageObjects.signinPage_po;
 
+@Listeners(Listener.ListenersClass.class)
 public class loginTest extends baseTest {
 	
 	WebDriverWait wait;
@@ -40,7 +46,7 @@ public class loginTest extends baseTest {
 		lPage.goToSignInPage();
 		sPage.userSignin(input.get("number"), input.get("pass"));
 		wait.until(ExpectedConditions.urlToBe(afterSigninUrl));
-		Assert.assertEquals(driver.getCurrentUrl(), afterSigninUrl);
+		AssertJUnit.assertEquals(driver.getCurrentUrl(), afterSigninUrl);
 	}
 
 	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,priority = 2, dataProvider = "getInvalidLoginData", description = "Validate user login with invalid credetials",
@@ -49,7 +55,7 @@ public class loginTest extends baseTest {
 	public void invalidUserTest(HashMap<String, String> input) {
 		lPage.goToSignInPage();
 		sPage.enterMobileNumberAndContinue(input.get("number"));
-		Assert.assertEquals(sPage.getErrorMsg().toLowerCase(), "incorrect phone number");
+		AssertJUnit.assertEquals(sPage.getErrorMsg().toLowerCase(), "incorrect phone number");
 
 	}
 	
@@ -58,7 +64,7 @@ public class loginTest extends baseTest {
 	{		
 		lPage.goToSignInPage();
 		sPage.enterMobileNumberAndContinue(" ");
-		Assert.assertTrue(driver.getCurrentUrl().contains("www.amazon.in/ap/signin?"));
+		AssertJUnit.assertTrue(driver.getCurrentUrl().contains("www.amazon.in/ap/signin?"));
 	}
 
 	@Test(retryAnalyzer=Utilities.RetryAnalyzerClass.class,description="validate user logout/signout when clicked on signout button",priority=3,groups="login/logout",dataProvider="getValidLoginData")
@@ -67,9 +73,9 @@ public class loginTest extends baseTest {
 		lPage.goToSignInPage();
 		sPage.userSignin(input.get("number"), input.get("pass"));
 		wait.until(ExpectedConditions.urlToBe(afterSigninUrl));
-		Assert.assertEquals(driver.getCurrentUrl(), afterSigninUrl);
+		AssertJUnit.assertEquals(driver.getCurrentUrl(), afterSigninUrl);
 		lPage.userSignOut();
-		Assert.assertTrue(driver.getCurrentUrl().contains("www.amazon.in/ap/signin?"));
+		AssertJUnit.assertTrue(driver.getCurrentUrl().contains("www.amazon.in/ap/signin?"));
 		
 	}
 	@DataProvider

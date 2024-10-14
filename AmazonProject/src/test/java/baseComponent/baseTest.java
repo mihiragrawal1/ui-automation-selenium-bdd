@@ -10,10 +10,15 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+
+import Listener.ListenersClass;
+
+@Listeners(Listener.ListenersClass.class)
 
 public class baseTest {
 	
-	public WebDriver driver;
+	public static WebDriver driver;
 	public String afterSigninUrl;
 	
 	public WebDriver browserConfig() throws IOException
@@ -50,6 +55,7 @@ public class baseTest {
 	public void launchBrowser() throws IOException
 	{
 		driver=browserConfig();
+		ListenersClass.driver=driver;
 		driver.get("https://www.amazon.in/");
 		driver.manage().window().maximize();
 	}

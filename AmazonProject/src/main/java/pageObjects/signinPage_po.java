@@ -1,14 +1,9 @@
 package pageObjects;
 
-import java.time.Duration;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Utilities.waitUtility;
 
@@ -61,19 +56,14 @@ public class signinPage_po extends waitUtility {
 		waitForElementVisibility(emptyCredentialMsg);
 		return emptyCredentialMsg.getText();
 	}
-	
-	
-	
-	
-	public void userSignin(String number,String pass)
-	{
+
+	public void userSignin(String number, String pass) {
 		waitForElementVisibility(mobileNumberFeild);
 		mobileNumberFeild.sendKeys(number);
 		continueButton.click();
 		waitForElementVisibility(passwordFeild);
 		passwordFeild.sendKeys(pass);
 		signinButton.click();
-		
-		
+
 	}
 }
